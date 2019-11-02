@@ -1,0 +1,16 @@
+galaxy_info:
+  role_name: unattended_upgrades
+  author: rremizov
+  description: Configure unattended upgrades and apticron on Debian Linux
+  license: MIT
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: Debian
+      versions:
+        - 9
+        - 10
+
+  galaxy_tags: []
+
+dependencies: []
