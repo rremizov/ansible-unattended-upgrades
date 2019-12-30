@@ -36,22 +36,33 @@ Unattended-Upgrade::Origins-Pattern {
 //      "o=Debian,a=stable";
 //      "o=Debian,a=stable-updates";
 //      "o=Debian,a=proposed-updates";
-        "origin=Debian,codename=${distro_codename},label=Debian-Security";
-        "origin=Debian,codename=${distro_codename},label=Debian";
-        "origin=Debian,codename=${distro_codename}-updates";
-        "origin=Syncthing";
+
+{% if ansible_distribution == 'Debian' %}
+    "origin=${distro_id},codename=${distro_codename},label=${distro_id}-Security";
+    "origin=${distro_id},codename=${distro_codename},label=${distro_id}";
+    "origin=${distro_id},codename=${distro_codename}-updates";
+    "origin=Syncthing";
+{% endif %}
 };
 
 // List of packages to not update (regexp are supported)
+// Beware, these are interpreted as regexes starting with "^".
+// I.e. "libc6" matches "libc6" AND "libc6-dev".
 Unattended-Upgrade::Package-Blacklist {
-//	"vim";
-//	"libc6";
-//	"libc6-dev";
-//	"libc6-i686";
+{% if ansible_distribution == 'Debian' %}
+    "linux-image";
+    "libc6";
+    "libc6-dev";
+    "libc6-i686";
+    "postgresql";
+    "mariadb-server";
+    "mysql-server";
+    "redis-server";
+{% endif %}
 };
 
 // This option allows you to control if on a unclean dpkg exit
-// unattended-upgrades will automatically run 
+// unattended-upgrades will automatically run
 //   dpkg --force-confold --configure -a
 // The default is true, to ensure updates keep getting installed
 //Unattended-Upgrade::AutoFixInterruptedDpkg "false";
@@ -102,4 +113,3 @@ Unattended-Upgrade::Automatic-Reboot "true";
 
 // Specify syslog facility. Default is daemon
 // Unattended-Upgrade::SyslogFacility "daemon";
-

@@ -1,0 +1,10 @@
+---
+unattended_upgrades_enable_for:
+  - distribution: Debian
+    version: "8"
+  - distribution: Debian
+    version: "9"
+  - distribution: Debian
+    version: "10"
+
+unattended_upgrades_disable_for: []

@@ -1,0 +1,5 @@
+---
+- name: Remove 20auto-upgrades
+  file:
+    path: /etc/apt/apt.conf.d/20auto-upgrades
+    state: absent
