@@ -37,28 +37,20 @@ Unattended-Upgrade::Origins-Pattern {
 //      "o=Debian,a=stable-updates";
 //      "o=Debian,a=proposed-updates";
 
-{% if ansible_distribution == 'Debian' %}
-    "origin=${distro_id},codename=${distro_codename},label=${distro_id}-Security";
-    "origin=${distro_id},codename=${distro_codename},label=${distro_id}";
-    "origin=${distro_id},codename=${distro_codename}-updates";
-    "origin=Syncthing";
-{% endif %}
+{% for pattern in unattended_upgrades_origins_pattern %}
+    "origin={{ pattern.origin }}
+    {%- if pattern.codename is defined %},codename={{ pattern.codename }}{% endif %}
+    {%- if pattern.label is defined %},label={{ pattern.label }}{% endif %}";
+{% endfor %}
 };
 
 // List of packages to not update (regexp are supported)
 // Beware, these are interpreted as regexes starting with "^".
 // I.e. "libc6" matches "libc6" AND "libc6-dev".
 Unattended-Upgrade::Package-Blacklist {
-{% if ansible_distribution == 'Debian' %}
-    "linux-image";
-    "libc6";
-    "libc6-dev";
-    "libc6-i686";
-    "postgresql";
-    "mariadb-server";
-    "mysql-server";
-    "redis-server";
-{% endif %}
+{% for package in unattended_upgrades_package_blacklist %}
+    "{{ package }}";
+{% endfor %}
 };
 
 // This option allows you to control if on a unclean dpkg exit
