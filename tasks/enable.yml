@@ -5,7 +5,7 @@
     state: present
   vars:
     packages:
-      - apt-listchanged
+      - apt-listchanges
       - apticron
       - unattended-upgrades
 
