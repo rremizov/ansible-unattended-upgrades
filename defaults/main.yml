@@ -4,6 +4,8 @@ unattended_upgrades_enable_for:
     version: "10"
   - distribution: Debian
     version: "11"
+  - distribution: Debian
+    version: "12"
 
 unattended_upgrades_disable_for: []
 
