@@ -13,16 +13,19 @@
   template:
     src: 50unattended-upgrades
     dest: /etc/apt/apt.conf.d/50unattended-upgrades
-    backup: yes
+    backup: true
+    mode: "0644"
 
 - name: Configure 20auto-upgrades
   template:
     src: 20auto-upgrades
     dest: /etc/apt/apt.conf.d/20auto-upgrades
-    backup: yes
+    backup: true
+    mode: "0644"
 
 - name: Configure apticron
   template:
     src: apticron.conf
     dest: /etc/apticron/apticron.conf
-    backup: yes
+    backup: true
+    mode: "0644"

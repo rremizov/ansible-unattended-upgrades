@@ -8,7 +8,7 @@ Configure unattended upgrades.
 Requirements
 ------------
 
-- Debian 8, 9, 10
+- Debian 10, 11, 12
 
 Role Variables
 --------------
@@ -40,11 +40,11 @@ Example
 
     unattended_upgrades_enable_for:
       - distribution: Debian
-        version: "8"
-      - distribution: Debian
-        version: "9"
-      - distribution: Debian
         version: "10"
+      - distribution: Debian
+        version: "11"
+      - distribution: Debian
+        version: "12"
 
     unattended_upgrades_disable_for:
       - distribution: Ubuntu
